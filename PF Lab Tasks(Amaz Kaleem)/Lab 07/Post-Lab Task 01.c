@@ -14,6 +14,7 @@ int main() {
     min = max = newArray[0];
 
 
+    //while loop
     while (count < thisLength)
     {
         sum = sum + newArray[count];
@@ -41,6 +42,7 @@ int main() {
 
     min = max = newArray[0];
 
+    //do-while loop
     do {
         sum = sum + newArray[count];
         if (newArray[count] < min) min = newArray[count];
