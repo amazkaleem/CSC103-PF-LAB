@@ -2,48 +2,62 @@
 #include <stdlib.h>
 
 int main() {
-    int adjacent = 1, base, hypotenuse;
+    int side1, side2, hypotenuse;
+    int limit = 100; // Using 500 as specified in the question
     
+    printf("=== WHILE LOOP IMPLEMENTATION ===\n");
     printf("Side1\tSide2\tHypotenuse\n");
     
-    //while loop
-    while (adjacent <= 100) {
-        base = adjacent;
-        while (base <= 100) {
-            hypotenuse = base;
-            while (hypotenuse <= 100) {
-                if (adjacent * adjacent + base * base == hypotenuse * hypotenuse) {
-                    printf("%d\t%d\t%d\n", adjacent, base, hypotenuse);
+    // While loop implementation
+    side1 = 1;
+    while (side1 <= limit) {
+        side2 = side1; // Start with side2 >= side1 to avoid duplicates
+        while (side2 <= limit) {
+            hypotenuse = side2; // Start with hypotenuse >= side2
+            while (hypotenuse <= limit) {
+                if (side1 * side1 + side2 * side2 == hypotenuse * hypotenuse) {
+                    printf("%d\t%d\t%d\n", side1, side2, hypotenuse);
                 }
                 hypotenuse++;
             }
-            base++;
+            side2++;
         }
-        adjacent++;
+        side1++;
     }
 
-    //do-while loop
-    adjacent = 1; 
-    base = 0; 
-    hypotenuse = 0;
-    
+    printf("\n=== DO-WHILE LOOP IMPLEMENTATION ===\n");
     printf("Side1\tSide2\tHypotenuse\n");
     
+    // Do-while loop implementation
+    side1 = 1;
     do {
-        base = adjacent;
+        side2 = side1; // Start with side2 >= side1 to avoid duplicates
         do {
-            hypotenuse = base;
+            hypotenuse = side2; // Start with hypotenuse >= side2
             do {
-                if (adjacent * adjacent + base * base == hypotenuse * hypotenuse) {
-                    printf("%d\t%d\t%d\n", adjacent, base, hypotenuse);
+                if (side1 * side1 + side2 * side2 == hypotenuse * hypotenuse) {
+                    printf("%d\t%d\t%d\n", side1, side2, hypotenuse);
                 }
                 hypotenuse++;
-            } while (hypotenuse <= 100);
-            base++;
-        } while (base <= 100);
-        adjacent++;
-    } while (adjacent <= 100);
+            } while (hypotenuse <= limit);
+            side2++;
+        } while (side2 <= limit);
+        side1++;
+    } while (side1 <= limit);
+    
+    printf("\n=== FOR LOOP IMPLEMENTATION ===\n");
+    printf("Side1\tSide2\tHypotenuse\n");
+    
+    // For loop implementation (triple-nested as required)
+    for (side1 = 1; side1 <= limit; side1++) {
+        for (side2 = side1; side2 <= limit; side2++) { // Start with side2 >= side1
+            for (hypotenuse = side2; hypotenuse <= limit; hypotenuse++) { // Start with hypotenuse >= side2
+                if (side1 * side1 + side2 * side2 == hypotenuse * hypotenuse) {
+                    printf("%d\t%d\t%d\n", side1, side2, hypotenuse);
+                }
+            }
+        }
+    }
     
     return 0;
-
 }

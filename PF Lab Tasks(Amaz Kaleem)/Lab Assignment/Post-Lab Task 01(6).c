@@ -4,25 +4,35 @@
 int main() 
 { 
     int sum = 0;
-    int i = 73; 
+    int i = 73;
 
-    //while loop
-    while (i < 416) {
+    // WHILE loop
+    while (i <= 415) {
         sum += i;
         i++;
     }
 
-    printf("The sum of values from 73 to 415 is: %d\n", sum); 
-    
-    //do-while loop
+    printf("Using WHILE loop: The sum of values from 73 to 415 is: %d\n", sum); 
+
+    // DO-WHILE loop
     sum = 0;
     i = 73;
 
     do {
         sum += i;
         i++;
-    } while (i < 416);
+    } while (i <= 415);
 
-    printf("The sum of values from 73 to 415 is: %d\n", sum); 
+    printf("Using DO-WHILE loop: The sum of values from 73 to 415 is: %d\n", sum); 
+
+    // FOR loop
+    sum = 0;
+
+    for (i = 73; i <= 415; i++) {
+        sum += i;
+    }
+
+    printf("Using FOR loop: The sum of values from 73 to 415 is: %d\n", sum); 
+
     return 0; 
 }

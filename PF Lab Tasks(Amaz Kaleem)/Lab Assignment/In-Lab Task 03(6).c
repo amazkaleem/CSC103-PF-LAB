@@ -1,80 +1,60 @@
-#include <stdio.h> 
-#include <stdlib.h> 
-#include <stdbool.h>
+#include <stdio.h>
 
-int main() { 
-    int num; 
-    char ch; 
-    bool reRun = false, isValid;  // Removed unnecessary initialization of isValid
+int main() {
+    int num;
+    char choice;
+    int i;
 
-    //while loop
-    while (reRun == false) { 
-        printf("Enter the value you want to test: \n");
+    // While loop version
+    printf("=== Using WHILE loop ===\n");
+    choice = 'y';
+
+    while (choice == 'y' || choice == 'Y') {
+        printf("Enter an integer: ");
         scanf("%d", &num);
 
-        if (num % 2 == 0) { 
-            printf("%d is Even\n", num);
-        } else { 
-            printf("%d is Odd\n", num);
-        } 
+        if (num % 2 == 0)
+            printf("Even\n");
+        else
+            printf("Odd\n");
 
-        printf("Write Y/y or N/n to rerun or terminate program\n"); 
-        scanf(" %c", &ch);
-
-        isValid = false;  // Reset isValid before entering the validation loop
-
-        while (isValid == false) {
-            if (ch == 'Y' || ch == 'y') { 
-                reRun = false; 
-                isValid = true;
-            } else if (ch == 'N' || ch == 'n') { 
-                reRun = true; 
-                isValid = true;
-            } else { 
-                printf("Invalid input! Please enter character again\n"); 
-                printf("Write Y/y or N/n to rerun or terminate program\n");
-                scanf(" %c", &ch);   
-            } 
-        } 
+        printf("Do you want to enter another number? (y/n): ");
+        scanf(" %c", &choice); // Note the space before %c to consume newline
     }
 
+    // Do-while version
+    printf("\n=== Using DO-WHILE loop ===\n");
+    do {
+        printf("Enter an integer: ");
+        scanf("%d", &num);
 
-    //do-while loop
-    num = 0;
-    ch = 'x';
-    reRun = false;
-    isValid = false;
-    
-    do 
-    { 
-        printf("Enter the value you want to test: \n");
-        scanf("%d",&num); 
-        if (num % 2 == 0) 
-        { 
-            printf("%d is Even\n",num); 
-        } else 
-        { 
-            printf("%d is Odd\n",num); 
-        } 
-        printf("write Y/y or N/n to rerun or terminate program\n"); 
-        scanf(" %c", &ch); 
-        do { 
-            if (ch == 'Y' || ch == 'y') 
-            { 
-                reRun = false; 
-                isValid = true; 
-            } else if (ch == 'N' || ch == 'n') 
-            { 
-                reRun = true; 
-                isValid = true;
-            } else 
-            { 
-                printf("Invalid input! please enter character again\n"); 
-                printf("write Y/y or N/n to rerun or terminate program\n");
-                scanf(" %c", &ch);                
-            } 
-        } while (isValid == false); 
-    } while (reRun == false);
+        if (num % 2 == 0)
+            printf("Even\n");
+        else
+            printf("Odd\n");
+
+        printf("Do you want to enter another number? (y/n): ");
+        scanf(" %c", &choice);
+    } while (choice == 'y' || choice == 'Y');
+
+    // For loop version — we'll simulate this with a break condition
+    printf("\n=== Using FOR loop ===\n");
+    for (;;) {
+        printf("Enter an integer: ");
+        scanf("%d", &num);
+
+        if (num % 2 == 0)
+            printf("Even\n");
+        else
+            printf("Odd\n");
+
+        printf("Do you want to enter another number? (y/n): ");
+        scanf(" %c", &choice);
+
+        if (choice != 'y' && choice != 'Y') {
+            break;
+        }
+    }
 
     return 0;
 }

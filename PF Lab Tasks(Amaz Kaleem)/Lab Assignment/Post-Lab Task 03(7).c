@@ -2,9 +2,10 @@
 #include <stdlib.h>
 
 int main() {
-    int i = 0, j;
+    int i, j;
 
-    //while-loop
+    printf("=== USING WHILE LOOP ===\n");
+    i = 0;
     while (i < 10) {
         j = 0;
         while (j < 2 * i + 1) {
@@ -15,19 +16,26 @@ int main() {
         i++;
     }
 
-    //do-while loop
-    int a = 0, b;
-    
+    printf("\n=== USING DO-WHILE LOOP ===\n");
+    i = 0;
     do {
-        b = 0;
+        j = 0;
         do {
-            printf("%d", a);
-            b++;
-        } while (b < 2 * a + 1);
+            printf("%d", i);
+            j++;
+        } while (j < 2 * i + 1);
         
         printf("\n");
-        a++;
-    } while (a < 10);
+        i++;
+    } while (i < 10);
+    
+    printf("\n=== USING FOR LOOP ===\n");
+    for (i = 0; i < 10; i++) {
+        for (j = 0; j < 2 * i + 1; j++) {
+            printf("%d", i);
+        }
+        printf("\n");
+    }
     
     return 0;
 }
