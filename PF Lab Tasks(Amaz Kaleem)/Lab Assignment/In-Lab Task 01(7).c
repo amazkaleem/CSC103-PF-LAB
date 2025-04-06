@@ -3,43 +3,64 @@
 
 int main()
 {
-    int n, product;
-    printf("Please enter the number for which you want to find the factorial: ");
+    int n, i, product;
+
+    // While Loop
+    printf("Please enter the number for which you want to find the factorial (while loop): ");
     scanf("%d", &n);
-    product = n;
+    product = 1;
+    i = n;
 
-    if (n == 0 || n == 1) 
-
+    if (n == 0 || n == 1)
     {
-        printf("The factorial of the number is: %d\n", product);
+        printf("The factorial is: 1\n");
     }
-    else {
-        //Calculating Factorial using while loop
-        while (n > 1)
+    else
+    {
+        while (i > 1)
         {
-            n = n - 1;
-            product = product * n;
-            printf("Product: %d\n", product);
+            product *= i;
+            i--;
         }
+        printf("Factorial (while loop) of %d is: %d\n", n, product);
+    }
 
-        printf("The factorial of the number is: %d\n", product);
+    // Do-While Loop
+    printf("\nPlease enter the number for which you want to find the factorial (do-while loop): ");
+    scanf("%d", &n);
+    product = 1;
+    i = n;
 
-        printf("Please enter the second number for which you want to find the factorial: ");
-        scanf("%d", &n);
-        product = n;
-
-        //Calculating Factorial using do-while loop
-        do 
+    if (n == 0 || n == 1)
+    {
+        printf("The factorial is: 1\n");
+    }
+    else
+    {
+        do
         {
-            n = n - 1;
-            product = product * n;
-            printf("Product: %d\n", product);
+            product *= i;
+            i--;
+        } while (i > 1);
+        printf("Factorial (do-while loop) of %d is: %d\n", n, product);
+    }
+
+    // For Loop
+    printf("\nPlease enter the number for which you want to find the factorial (for loop): ");
+    scanf("%d", &n);
+    product = 1;
+
+    if (n == 0 || n == 1)
+    {
+        printf("The factorial is: 1\n");
+    }
+    else
+    {
+        for (i = n; i > 1; i--)
+        {
+            product *= i;
         }
-        while (n > 2);
-        
-
-        printf("The factorial of the number is: %d\n", product);
-
+        printf("Factorial (for loop) of %d is: %d\n", n, product);
     }
 
     return 0;

@@ -1,33 +1,50 @@
 #include <stdio.h> 
 #include <stdlib.h> 
+
 int main() 
 { 
-    int x,y,result = 1; 
-    printf("Enter the values of x & y separated by space in between: "); 
+    int x, y, result, i;
+
+    // WHILE LOOP implementation
+    printf("=== Using WHILE loop ===\n");
+    printf("Enter the values of x & y separated by space: "); 
     scanf("%d %d", &x, &y); 
 
-
-    // while loop
-    int i = 1;
-    while (i < (y + 1)) {
+    result = 1;
+    i = 1;
+    while (i <= y) {
         result *= x;
         i++;
     }
+    printf("%d raised to the power %d = %d\n", x, y, result); 
 
-    printf("%d raised to the power %d = %d\n",x,y,result); 
+    // DO-WHILE LOOP implementation
+    printf("\n=== Using DO-WHILE loop ===\n");
+    printf("Enter the values of x & y separated by space: "); 
+    scanf("%d %d", &x, &y); 
 
-
-    //do-while loop
-    i = 1;
     result = 1;
+    i = 1;
+    if (y >= 1) {
+        do {
+            result *= x;
+            i++;
+        } while (i <= y);
+    } else {
+        result = 1;  // x^0 = 1
+    }
+    printf("%d raised to the power %d = %d\n", x, y, result); 
 
-    do {
+    // FOR LOOP implementation
+    printf("\n=== Using FOR loop ===\n");
+    printf("Enter the values of x & y separated by space: "); 
+    scanf("%d %d", &x, &y); 
+
+    result = 1;
+    for (i = 1; i <= y; i++) {
         result *= x;
-        i++;
-    } while (i < (y + 1));
-
-    printf("%d raised to the power %d = %d\n",x,y,result);
+    }
+    printf("%d raised to the power %d = %d\n", x, y, result); 
 
     return 0;
-        
 }

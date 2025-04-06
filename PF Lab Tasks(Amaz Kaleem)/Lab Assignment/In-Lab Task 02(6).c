@@ -2,35 +2,35 @@
 #include <stdlib.h>
 
 int main() {
+    int x, y, count;
 
-    int a,b,count,answer;
-    count = 1; 
-    printf("Please enter values of x and y separated by spaces: "); 
-    scanf("%d %d",&a,&b);
+    // While Loop
+    printf("Please enter values of x and y (while loop): ");
+    scanf("%d %d", &x, &y);
 
-    // while loop
-    while (count < (b + 1)) {
-
-        answer = a * count;
-        printf("%d * %d = %d\n", a, count, answer);
-        count ++;
-
-     }
-
-
-    //do-while loop
     count = 1;
-    answer = 1;
+    while (count <= y) {
+        printf("%d x %d = %d\n", x, count, x * count);
+        count++;
+    }
 
-    printf("Please enter values of x and y separated by spaces: "); 
-    scanf("%d %d",&a,&b);
+    // Do-While Loop
+    printf("\nPlease enter values of x and y (do-while loop): ");
+    scanf("%d %d", &x, &y);
 
+    count = 1;
     do {
-        answer = a * count;
-        printf("%d * %d = %d\n", a, count, answer);
-        count ++;
+        printf("%d x %d = %d\n", x, count, x * count);
+        count++;
+    } while (count <= y);
 
-    } while (count < (b + 1));
+    // For Loop
+    printf("\nPlease enter values of x and y (for loop): ");
+    scanf("%d %d", &x, &y);
+
+    for (count = 1; count <= y; count++) {
+        printf("%d x %d = %d\n", x, count, x * count);
+    }
 
     return 0;
 }
