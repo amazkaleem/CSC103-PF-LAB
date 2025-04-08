@@ -1,5 +1,8 @@
 #include <stdio.h>
 
+
+//Write a program that determines the number entered by the user is even or odd. After displaying the message (“Even” or “Odd”), it ask the user Do you want to enter another number (y/n). If the user enter y, it do the same process again otherwise exit.
+
 int main() {
     int num;
     char choice;

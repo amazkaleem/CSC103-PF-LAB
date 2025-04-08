@@ -1,6 +1,8 @@
 #include <stdio.h> 
 #include <stdlib.h> 
 
+//Question: Write a program that input one integer n from the user. It prints all the even number from 1 to n.
+
 int main() 
 { 
     int n, i;
