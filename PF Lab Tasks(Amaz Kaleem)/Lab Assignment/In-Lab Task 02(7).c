@@ -2,6 +2,21 @@
 #include <stdlib.h>
 #include <math.h>
 
+
+//Question: Newton-Raphson iteration
+// Define the function f(x) = cos(x) - x
+// The equation f(x) = 0 cannot be solved by mathematical analysis. In order to solve an equation like this we have to use a numerical method, typically on a computer. An often used method is called Newton-Raphson iteration.
+// The principle is this:
+// guess an x-value called x1 which you expect to be near the solution.
+// calculate y1 = f(x1)
+// calculate the derivative y1' = f'(x1) = -sin(x1) - 1.
+// approximate the function f(x) with the straight line which is the tangent of the curve y= f(x) in the point (x1,y1). The tangent crosses the x-axis at the point
+// 2 = x1 - y1 / y1'
+// now x2 is (hopefully) nearer the solution than x1.
+// Calculate x3 = x2 - y2 / y2' and so on until the solution is as accurate as you desire.
+// stop with an error message if the x-values do not converge towards a solution.
+// Let your program write out x1, y1, x2, y2, x3, y3, and so on. Try with different values for the initial guess, x1, and see if it converges towards the solution.
+
 int main() {
     double x, func, derivative;
     int count, max_iterations;

@@ -1,6 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+//Question: Write a C program to input characters from the user until a blank is read. Use a for loop to find the number of nonblank characters read from the keyboard.
+
 int main()
 {
     char ch = 'x';

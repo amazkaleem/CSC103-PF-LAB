@@ -1,6 +1,13 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+
+//Question: Write a program using while loop which Prints the following pattern up to 10 lines
+// 0
+// 111
+// 22222
+// 3333333
+
 int main() {
     int i, j;
 

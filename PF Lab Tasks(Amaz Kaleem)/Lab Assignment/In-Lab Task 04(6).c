@@ -1,6 +1,8 @@
 #include <stdio.h> 
 #include <stdlib.h> 
 
+//Write a program that input two integers x and y from the user. It calculates and then displays the x raise to power y (xy).
+
 int main() 
 { 
     int x, y, result, i;

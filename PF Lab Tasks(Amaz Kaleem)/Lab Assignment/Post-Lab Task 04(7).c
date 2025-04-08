@@ -1,6 +1,14 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+
+// Write a program using while loop to generate the following pattern on screen
+// *****
+// ****
+// ***
+// **
+// *
+
 int main () {
     int i = 5, j;
 

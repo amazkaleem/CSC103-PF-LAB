@@ -1,6 +1,8 @@
 #include <stdio.h> 
 #include <stdlib.h>
 
+//Question: Write a C program using for loop to find the sum of the integers 73 through 415 inclusive.
+
 int main() 
 { 
     int sum = 0;

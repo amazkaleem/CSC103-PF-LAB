@@ -1,6 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+//Question: Write a program that reads a non-negative integer and prints its factorial. Factorial of a number n>1 is defined by and for n=0 or 1 factorial is 1. (e.g. 5! = 5*(5-1)*(5-2)*(5-3)*(5-4) which equals 5*4*3*2*1=120). Calculate factorial using while and do-while loop.
+
 int main()
 {
     int n, i, product;

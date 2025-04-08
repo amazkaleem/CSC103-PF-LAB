@@ -1,6 +1,11 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+//Question: Write a program that input two integers x and y from the user. It display the table of x upto y e.g. if the user input as x = 2 and y = 3 then the program displays the following output
+// 2 x 1 = 2
+// 2 x 2 = 4
+// 2 x 3 = 6
+
 int main() {
     int x, y, count;
 

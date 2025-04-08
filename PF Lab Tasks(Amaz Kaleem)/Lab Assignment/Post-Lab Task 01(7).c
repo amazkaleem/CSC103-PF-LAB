@@ -1,6 +1,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+
+// Question: Make a program that calculates the sum, mean, minimum, and maximum of a series of numbers use while loop for this purpose.
+
 int main() {
     int newArray[] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
 
