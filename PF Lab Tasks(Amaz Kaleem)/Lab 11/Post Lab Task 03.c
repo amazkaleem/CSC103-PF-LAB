@@ -2,6 +2,7 @@
 
 #define DIVISIONS 3
 #define PRODUCTS 4
+#define SUPPLIERS 3
 
 // Structure for each transaction
 struct Transaction {
@@ -20,12 +21,13 @@ float itemCost[DIVISIONS][PRODUCTS] = {0.0};   // Stores cost per item
 void updateInventory(struct Transaction t) {
     int d = t.divisionID - 1;
     int p = t.productID - 1;
+    int s = t.supplierID;
 
-    if (d >= 0 && d < DIVISIONS && p >= 0 && p < PRODUCTS) {
+    if (d >= 0 && d < DIVISIONS && p >= 0 && p < PRODUCTS && s >= 0 && s <= SUPPLIERS) {
         inventory[d][p] += t.quantityReceived;
         itemCost[d][p] = t.costPerItem;
     } else {
-        printf("Invalid division or product ID!\n");
+        printf("Invalid division or product or supplier ID!\n");
     }
 }
 
