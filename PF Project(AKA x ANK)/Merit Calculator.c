@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <string.h>
 
-#define MAX_STUDENTS 15
+#define MAX_STUDENTS 7
 #define SUBJECTS 6
 
 typedef struct {
@@ -81,13 +81,70 @@ void inputStudents() {
             scanf("%s", s.preferences[j]);
         }
 
-        // Write to file
         fprintf(f, "%s\n%.2f\n%.2f\n%.2f\n%s %s %s\n",
                 s.name, s.entryMarks, s.fsc, s.matric,
                 s.preferences[0], s.preferences[1], s.preferences[2]);
     }
 
     fclose(f);
+}
+
+void reconsiderSeats(Student students[], Subject subjects[], int studentCount, int subjectCount) {
+    for (int i = 0; i < studentCount; i++) {
+        if (strcmp(students[i].assignedSubject, "Ineligible") != 0 &&
+            strcmp(students[i].assignedSubject, "None") != 0) {
+
+            printf("\n%s was allocated %s. Do they want to keep the seat? (yes/no): ", 
+                   students[i].name, students[i].assignedSubject);
+            char response[10];
+            scanf("%s", response);
+
+            if (strcmp(response, "no") == 0 || strcmp(response, "No") == 0) {
+                // Free the seat
+                for (int j = 0; j < subjectCount; j++) {
+                    if (strcmp(subjects[j].name, students[i].assignedSubject) == 0) {
+                        subjects[j].filled--;
+                        break;
+                    }
+                }
+
+                strcpy(students[i].assignedSubject, "None");
+
+                for (int k = 0; k < studentCount; k++) {
+                    if (students[k].merit >= 50 && strcmp(students[k].assignedSubject, "None") == 0) {
+                        for (int j = 0; j < subjectCount; j++) {
+                            if (strcmp(subjects[j].name, students[i].assignedSubject) == 0 &&
+                                subjects[j].filled < subjects[j].seats) {
+
+                                strcpy(students[k].assignedSubject, subjects[j].name);
+                                subjects[j].filled++;
+                                printf("-> Seat re-assigned to %s (Merit: %.2f)\n", 
+                                       students[k].name, students[k].merit);
+                                break;
+                            }
+                        }
+                        break;
+                    }
+                }
+            }
+        }
+    }
+}
+
+void allocateRemainingSeats(Student students[], Subject subjects[], int studentCount, int subjectCount) {
+    for (int i = 0; i < studentCount; i++) {
+        if (students[i].merit >= 50 && strcmp(students[i].assignedSubject, "None") == 0) {
+            for (int j = 0; j < subjectCount; j++) {
+                if (subjects[j].filled < subjects[j].seats) {
+                    strcpy(students[i].assignedSubject, subjects[j].name);
+                    subjects[j].filled++;
+                    printf("Automatically assigned %s to %s (Merit: %.2f)\n",
+                           subjects[j].name, students[i].name, students[i].merit);
+                    break;
+                }
+            }
+        }
+    }
 }
 
 int main() {
@@ -97,11 +154,9 @@ int main() {
     };
     Student students[MAX_STUDENTS];
 
-    // 1. Get inputs and store them in files
     inputSubjects();
     inputStudents();
 
-    // 2. Read subjects from file
     FILE *sf = fopen("subjects.txt", "r");
     if (!sf) {
         printf("Error opening subjects.txt\n");
@@ -112,7 +167,6 @@ int main() {
     }
     fclose(sf);
 
-    // 3. Read students from file
     FILE *stf = fopen("students.txt", "r");
     if (!stf) {
         printf("Error opening students.txt\n");
@@ -132,12 +186,10 @@ int main() {
     }
     fclose(stf);
 
-    // 4. Sort by merit
     sortStudentsByMerit(students, MAX_STUDENTS);
 
     FILE *logf = fopen("unassigned_log.txt", "w");
 
-    // 5. Subject allocation
     for (int i = 0; i < MAX_STUDENTS; i++) {
         if (students[i].merit < 50) {
             strcpy(students[i].assignedSubject, "Ineligible");
@@ -159,33 +211,32 @@ int main() {
         }
 
         if (!assigned) {
-            fprintf(logf, "%s was not assigned any preferred subject.\n", students[i].name);
+            fprintf(logf, "%s was not assigned any seat initially. Pending possible reassignment.\n", students[i].name);
             printf("\n%s was not allocated any of their preferred subjects.\n", students[i].name);
-        	printf("Available subjects:\n");
-	        for(int k = 0; k < SUBJECTS; k++) {
-	            if(subjects[k].filled < subjects[k].seats) {
-	                printf("%s ", subjects[k].name);
-	            }
-	        }
-	        printf("\nChoose from the above available subjects: ");
-	        char choice[10];
-	        scanf("%s", choice);
-	        for(int k = 0; k < SUBJECTS; k++) {
-	            if(strcmp(choice, subjects[k].name) == 0 && subjects[k].filled < subjects[k].seats) {
-	                strcpy(students[i].assignedSubject, subjects[k].name);
-	                subjects[k].filled++;
-	                break;
-	            }
-	        }
-            if (strcmp(students[i].assignedSubject, "None") == 0) {
-                fprintf(logf, "No available seats for %s.\n", students[i].name);
+            printf("Available subjects:\n");
+            for (int k = 0; k < SUBJECTS; k++) {
+                if (subjects[k].filled < subjects[k].seats) {
+                    printf("%s ", subjects[k].name);
+                }
+            }
+            printf("\nChoose from the above available subjects: ");
+            char choice[10];
+            scanf("%s", choice);
+            for (int k = 0; k < SUBJECTS; k++) {
+                if (strcmp(choice, subjects[k].name) == 0 && subjects[k].filled < subjects[k].seats) {
+                    strcpy(students[i].assignedSubject, subjects[k].name);
+                    subjects[k].filled++;
+                    break;
+                }
             }
         }
     }
 
     fclose(logf);
 
-    // 6. Final merit list
+    reconsiderSeats(students, subjects, MAX_STUDENTS, SUBJECTS);
+    allocateRemainingSeats(students, subjects, MAX_STUDENTS, SUBJECTS);
+
     FILE *outf = fopen("final_merit_list.txt", "w");
     fprintf(outf, "----- Final Merit List -----\n");
     fprintf(outf, "%-20s %-10s %-10s %-10s %-10s\n", "Name", "FSc", "Matric", "Merit", "Assigned");
@@ -198,9 +249,8 @@ int main() {
 
     fclose(outf);
 
-    printf("\n Data saved to files successfully.\nCheck:\n");
+    printf("\nData saved to files successfully.\nCheck:\n");
     printf("  - subjects.txt\n  - students.txt\n  - final_merit_list.txt\n  - unassigned_log.txt\n");
 
     return 0;
 }
-
