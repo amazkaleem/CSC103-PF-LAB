@@ -1,10 +1,4 @@
-Hina was not assigned any preferred subject.
-Imran was not assigned any preferred subject.
-Junaid was not assigned any preferred subject.
-Komal was not assigned any preferred subject.
-Laiba was not assigned any preferred subject.
-Mehmood was not assigned any preferred subject.
-Nida was not assigned any preferred subject.
-No available seats for Nida.
-Omair was not assigned any preferred subject.
-No available seats for Omair.
+David was not assigned any seat initially. Pending possible reassignment.
+Ethan was not assigned any seat initially. Pending possible reassignment.
+Fatima was not assigned any seat initially. Pending possible reassignment.
+George was not assigned any seat initially. Pending possible reassignment..
