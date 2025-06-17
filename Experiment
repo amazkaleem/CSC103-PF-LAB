@@ -1,0 +1,67 @@
+void reconsiderSeats(Student students[], Subject subjects[], int studentCount, int subjectCount) {
+    for (int i = 0; i < studentCount; i++) {
+        if (strcmp(students[i].assignedSubject, "Ineligible") != 0 &&
+            strcmp(students[i].assignedSubject, "None") != 0) {
+
+            printf("\n%s was allocated %s. Do they want to keep the seat? (yes/no): ", 
+                   students[i].name, students[i].assignedSubject);
+            char response[10];
+            scanf("%s", response);
+
+            if (strcmp(response, "no") == 0 || strcmp(response, "No") == 0) {
+                // Free the seat
+                for (int j = 0; j < subjectCount; j++) {
+                    if (strcmp(subjects[j].name, students[i].assignedSubject) == 0) {
+                        subjects[j].filled--;
+                        break;
+                    }
+                }
+
+                // Mark student as unassigned
+                strcpy(students[i].assignedSubject, "None");
+
+                // Try to assign the freed seat to next eligible unassigned student
+                for (int k = 0; k < studentCount; k++) {
+                    if (students[k].merit >= 50 && 
+                        strcmp(students[k].assignedSubject, "None") == 0) {
+
+                        for (int j = 0; j < subjectCount; j++) {
+                            if (strcmp(subjects[j].name, students[i].assignedSubject) == 0 &&
+                                subjects[j].filled < subjects[j].seats) {
+
+                                strcpy(students[k].assignedSubject, subjects[j].name);
+                                subjects[j].filled++;
+                                printf("-> Seat re-assigned to %s (Merit: %.2f)\n", 
+                                       students[k].name, students[k].merit);
+                                break;
+                            }
+                        }
+                        break; // Only assign to one student
+                    }
+                }
+            }
+        }
+    }
+}
+In your main() function, just before writing the final merit list, insert this call:
+
+c
+Copy
+Edit
+reconsiderSeats(students, subjects, MAX_STUDENTS, SUBJECTS);
+So the flow becomes:
+
+c
+Copy
+Edit
+// 5. Subject allocation
+// ... existing allocation logic ...
+
+// NEW: Optional seat retention step
+reconsiderSeats(students, subjects, MAX_STUDENTS, SUBJECTS);
+
+// 6. Final merit list
+📝 Notes
+This function works interactively, so if you're running this in a non-interactive (e.g. script or batch) mode, it will pause and wait for user input.
+
+You can further enhance it by logging changes or writing updated info back to the files if needed.
